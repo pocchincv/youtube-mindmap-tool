@@ -4,8 +4,18 @@ API router configuration
 
 from fastapi import APIRouter
 
+# Import sub-routers
+from .youtube import router as youtube_router
+from .stt import router as stt_router
+from .analysis import router as analysis_router
+
 # Create main API router
 api_router = APIRouter()
+
+# Include sub-routers
+api_router.include_router(youtube_router)
+api_router.include_router(stt_router)
+api_router.include_router(analysis_router)
 
 # Health check endpoint
 @api_router.get("/health")
